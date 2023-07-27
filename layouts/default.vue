@@ -5,13 +5,13 @@
       <nav>
         <div class="p-4 flex flex-row justify-between px-10 items-center h-16">
           <div class="flex flex-row gap-10 items-center">
-            <NuxtLink to="/" class="flex flex-row gap-3 items-center"><img src="/house.svg" class="h-10 w-10"/><h1 class="hidden lg:flex">ApartmentPro</h1></NuxtLink>
+            <NuxtLink to="/" class="flex flex-row gap-3 items-center"><img :src="houseSvg" class="h-10 w-10"/><h1 class="hidden lg:flex">ApartmentPro</h1></NuxtLink>
             <NuxtLink to="/apartments" >Apartments</NuxtLink>
           </div>
 
           <div class="flex-row gap-2 items-center justify-center hidden md:flex">
             <input type="text" placeholder="Search" class="border-2 border-slate-500 focus:outline-none rounded-md p-2 h-8"/>
-            <img src="/search.svg" class="h-7 w-7"/>
+            <img :src="searchSvg" class="h-7 w-7"/>
           </div>
 
           <div class="flex flex-row gap-6 items-center">
@@ -39,6 +39,9 @@
 </template>
 
 <script setup>
+import houseSvg from '~/assets/house.svg';
+import searchSvg from '~/assets/search.svg';
+
 
 </script>
 
