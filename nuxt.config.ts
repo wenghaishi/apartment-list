@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["@/assets/css/main.css"],
+  nitro: {
+    plugins: ["~/server/index.js"],
+  },
+  runtimeConfig:{
+    mongodbUri: process.env.MONGODB_URI
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
