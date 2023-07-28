@@ -13,6 +13,10 @@ const apartmentSchema = new Schema({
     type: String,
     required: [true, "Please provide doorNumber"],
   },
+  imageUrl: {
+    type: String,
+    required: [true, "Please provide imageUrl"],
+  },
 });
 
 export const Apartment = model("Apartment", apartmentSchema);

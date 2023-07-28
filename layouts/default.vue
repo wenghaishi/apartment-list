@@ -1,9 +1,9 @@
 <template>
   <div class="h-screen flex flex-col justify-between ">
         <!-- header component -->
-    <header class="shadow-sm bg-white">
-      <nav>
-        <div class="p-4 flex flex-row justify-between px-10 items-center h-16 max-w-screen-2xl mx-auto">
+    <header class="mb-16">
+      <nav class="top-0 fixed z-50 shadow-md bg-white w-screen ">
+        <div class="p-4 flex flex-row justify-between px-10 items-center h-16 max-w-screen-2xl">
           <div class="flex flex-row gap-10 items-center">
             <NuxtLink to="/" class="flex flex-row gap-3 items-center"><img :src="houseSvg" class="h-10 w-10"/><h1 class="hidden lg:flex">ApartmentPro</h1></NuxtLink>
             <NuxtLink to="/apartments" >Apartments</NuxtLink>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- footer component -->
-    <div class="h-14 flex flex-row shadow-md items-center justify-evenly px-20 border-y">
+    <div class="h-14 flex flex-row shadow-md items-center justify-evenly px-20 border-y w-screen">
       <NuxtLink to="/" class="hidden lg:flex">ApartmentPro</NuxtLink>
       <p>Copyright © 2023 - All right reserved by ApartmentPro Ltd</p>
       <NuxtLink to="/apartments" class="hidden lg:flex">Apartments</NuxtLink>
