@@ -1,11 +1,13 @@
 <template>
   <div>
-    hi
+
   </div>
 </template>
 
-<script setup>
-
+<script>
+  export default {
+    
+  }
 </script>
 
 <style lang="scss" scoped>
