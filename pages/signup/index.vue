@@ -10,9 +10,10 @@
       <form action="" class="flex flex-col text-2xl items-center justify-center h-full gap-9">
         <h1 class="italic text-slate-600">Get Started!</h1>
         <input type="text" placeholder="Email" class="p-2 border-2 rounded-lg focus:outline-none w-1/2">
-        <input type="text" placeholder="Password" class="p-2 border-2 rounded-lg focus:outline-none w-1/2">
+        <input type="password" placeholder="Password" class="p-2 border-2 rounded-lg focus:outline-none w-1/2">
         <input type="text" placeholder="Name" class="p-2 border-2 rounded-lg focus:outline-none w-1/2">
-        <button class="bg-red-500 text-white px-6 py-2 rounded-lg">Submit</button>
+        <button class="bg-red-500 text-white px-10 py-2 rounded-lg">Submit</button>
+        <NuxtLink to="/login" class="text-sm">Already have an account?</NuxtLink>
       </form>
     </div>
   </div>
