@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col justify-between ">
+  <div class=" flex flex-col ">
         <!-- header component -->
     <header class="mb-16">
       <nav class="top-0 fixed z-50 shadow-md bg-white w-screen ">
@@ -28,7 +28,7 @@
     </div>
 
     <!-- footer component -->
-    <div class="h-14 flex flex-row shadow-md items-center justify-evenly px-20 border-y w-screen">
+    <div class="h-14 flex flex-row shadow-md items-center justify-evenly fixed bottom-0 bg-white px-20 border-y w-screen">
       <NuxtLink to="/" class="hidden lg:flex">ApartmentPro</NuxtLink>
       <p>Copyright © 2023 - All right reserved by ApartmentPro Ltd</p>
       <NuxtLink to="/apartments" class="hidden lg:flex">Apartments</NuxtLink>

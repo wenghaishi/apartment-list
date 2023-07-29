@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-40 h-full">
     <form action="" class="flex flex-col text-2xl items-center justify-center h-full gap-9">
         <h1 class="italic text-slate-600">Login to your account</h1>
         <input type="text" placeholder="Email" class="p-2 border-2 rounded-lg focus:outline-none w-1/2 max-w-sm">
