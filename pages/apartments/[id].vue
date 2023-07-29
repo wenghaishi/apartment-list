@@ -24,15 +24,15 @@
       <div class="pl-10 lg:w-4/12 h-full mt-20 lg:fixed right-20">
         <div class=" shadow-md rounded-xl mt-2 w-full border-2 h-96 flex flex-col items-center justify-center">
           <label for="items" class="mb-10 text-2xl">Add a new item</label>
-          <form action="" class="flex flex-col items-center justify-center">
-            <select id="items" name="items" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-1 mb-8">
+          <form @submit.prevent="handleAddItem" action="" class="flex flex-col items-center justify-center">
+            <select id="items" name="items" v-model="itemData.itemName" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-1 mb-8">
               <option value="table" class="w-full">Table</option>
               <option value="chair" class="w-full">Chair</option>
               <option value="Sofa" class="w-full">Sofa</option>
               <option value="fridge" class="w-full">Fridge</option>
             </select>
-            <input type="number" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="Amount to add">
-            <button class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Add Item</button>
+            <input type="number" v-model="itemData.itemQuantity" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="Amount to add">
+            <button type="submit" class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Add Item</button>
           </form>
         </div>
     </div>
@@ -41,7 +41,7 @@
       <div class="pl-10 lg:w-4/12 h-full mt-20 lg:fixed right-20">
       <div class=" shadow-md rounded-xl mt-2 w-full border-2 h-96 flex flex-col items-center justify-center">
         <label for="items" class="mb-10 text-2xl">Create Inventory List</label>
-        <form @submit.prevent="handleSubmit" action="" class="flex flex-col items-center justify-center">
+        <form @submit.prevent="handleCreateList" action="" class="flex flex-col items-center justify-center">
           <input v-model="formData.name" type="text" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="List name">
           <button type="submit" class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Create List</button>
         </form>
@@ -68,9 +68,13 @@
     name: ''
   })
 
-  let hasList = false
+  const itemData = ref({
+    itemName: "",
+    itemQuantity: "",
+  })
 
-  const handleSubmit = async () => {
+
+  const handleCreateList = async () => {
     const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
         method: 'post',
         body: { 
@@ -80,10 +84,22 @@
 
     if (responseData) {
       console.log(responseData)
-      hasList = true
-      console.log(hasList)
     }
-}
+  }
+
+  const handleAddItem = async () => {
+    const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
+        method: 'post',
+        body: { 
+          itemName: itemData.value.itemName, 
+          itemQuantity: itemData.value.itemQuantity, 
+        }
+    })
+
+    if (responseData) {
+      console.log(responseData)
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
