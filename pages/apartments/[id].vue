@@ -19,7 +19,7 @@
               <option value="table" class="w-full">Table</option>
               <option value="chair" class="w-full">Chair</option>
               <option value="Sofa" class="w-full">Sofa</option>
-              <option value="fridge" class="w-full">Frige</option>
+              <option value="fridge" class="w-full">Fridge</option>
             </select>
             <input type="number" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="Amount to add">
             <button class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Add Item</button>
@@ -31,9 +31,9 @@
       <div class="pl-10 lg:w-4/12 h-full mt-20 lg:fixed right-20">
       <div class=" shadow-md rounded-xl mt-2 w-full border-2 h-96 flex flex-col items-center justify-center">
         <label for="items" class="mb-10 text-2xl">Create Inventory List</label>
-        <form action="" class="flex flex-col items-center justify-center">
-          <input type="text" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="List name">
-          <button class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Create List</button>
+        <form @submit.prevent="handleSubmit" action="" class="flex flex-col items-center justify-center">
+          <input v-model="formData.name" type="text" class="w-60 h-12 border-2 rounded-lg focus:outline-none p-2" placeholder="List name">
+          <button type="submit" class="w-60 bg-red-500 py-3 rounded-lg mt-8 text-white">Create List</button>
         </form>
       </div>
     </div>
@@ -46,10 +46,28 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue'
   const { id } = useRoute().params
   const { data: apartment } = await useFetch(`http://localhost:3000/api/apartments/${id}`);
   const inventoryList = apartment._rawValue.inventoryList.items
   console.log(inventoryList)
+
+  const formData = ref({
+    name: ''
+})
+
+  const handleSubmit = async () => {
+    const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
+        method: 'post',
+        body: { 
+          name: formData.value.name, 
+        }
+    })
+
+    if (responseData) {
+      console.log(responseData)
+    }
+}
 </script>
 
 <style lang="scss" scoped>
