@@ -3,14 +3,24 @@
     <div class="lg:w-3/5 h-screen">
       <h1 class="text-left text-4xl my-6">{{ apartment.address }}</h1>
       <img :src="apartment.imageUrl" :alt="`Image of ${apartment.address}`" class="h-3/5 w-full object-cover rounded-xl"/>
-      <h2 class="py-2 italic text-2xl border-b-2">Floor: {{ apartment.floor }}</h2>
-      <h2 class="py-2 italic text-2xl border-b-2">Door Number: {{ apartment.doorNumber }}</h2>
+      <div class="flex flex-row w-full px-1">
+        <h2 class="py-2 italic text-2xl mr-6">Floor: {{ apartment.floor }}</h2>
+        <h2 class="py-2 italic text-2xl ">Door Number: {{ apartment.doorNumber }}</h2>
+      </div>
+      <h2 v-if="inventoryList.name" class="italic text-2xl border-2 rounded-lg p-4">
+        <h2 class="mb-4">Inventory List name: {{ inventoryList.name }}</h2>
+        <h2>Items:
+          <div v-for="item in inventoryList.items">{{ item.name }}</div>
+        </h2>
+      </h2>
+
+      <h2 v-else class="py-2 italic text-2xl border-b-2 text-red-500">No inventory list found</h2>
       <p class="mt-4 italic text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
     </div>
 
 
-    <div v-if="inventoryList.length > 0">
+    <div v-if="inventoryList.name">
       <div class="pl-10 lg:w-4/12 h-full mt-20 lg:fixed right-20">
         <div class=" shadow-md rounded-xl mt-2 w-full border-2 h-96 flex flex-col items-center justify-center">
           <label for="items" class="mb-10 text-2xl">Add a new item</label>
@@ -49,12 +59,16 @@
   import { ref } from 'vue'
   const { id } = useRoute().params
   const { data: apartment } = await useFetch(`http://localhost:3000/api/apartments/${id}`);
-  const inventoryList = apartment._rawValue.inventoryList.items
+  const inventoryList = apartment._rawValue.inventoryList
   console.log(inventoryList)
+
+  
 
   const formData = ref({
     name: ''
-})
+  })
+
+  let hasList = false
 
   const handleSubmit = async () => {
     const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
@@ -66,6 +80,8 @@
 
     if (responseData) {
       console.log(responseData)
+      hasList = true
+      console.log(hasList)
     }
 }
 </script>
