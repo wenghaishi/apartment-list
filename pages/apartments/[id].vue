@@ -1,9 +1,21 @@
 <template>
+
+<!-- error modal for max quantity exceeded -->
+<dialog id="my_modal_1" class="modal">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-3xl">Error</h3>
+    <p class="py-4 text-xl text-red-500 ">Item number exceeded the maximum: 20</p>
+    <div class="modal-action">
+      <!-- if there is a button in form, it will close the modal -->
+      <button class="btn">Close</button>
+    </div>
+  </form>
+</dialog>
   <!-- approve add item modal -->
 <dialog id="my_modal_4" class="modal">
   <form method="dialog" class="modal-box w-8/12 max-w-5xl">
     <h3 class="font-bold text-4xl text-center mt-4">Preview</h3>
-    <div class="flex flex-row justify-evenly">
+    <div class="flex flex-row mx-14 justify-between">
       <p class="py-4  text-2xl ">Current Items
         <div class="border-2 rounded-xl p-4 mt-4">
           <div v-for="item in inventoryList.items" class="text-xl italic p-2 bor">{{ item.name }} x {{ item.quantity }}</div>
@@ -26,14 +38,14 @@
 
     <div class="flex flex-row justify-evenly">
       <!-- if there is a button, it will close the modal -->
-      <div @click="handleAddItem" class="bg-red-500 cursor-pointer px-12 py-4 mx-4 rounded-lg text-white">Confirm</div>
+      <button @click="handleAddItem" class="bg-red-500 cursor-pointer px-12 py-4 mx-4 rounded-lg text-white">Confirm</button>
       <button class=" px-14 py-4 mx-4 rounded-lg">Close</button>
     </div>
   </form>
 </dialog>
 
   <!-- information display about apartment -->
-  <div class="flex lg:flex-row flex-col mx-20 mt-4 mb-20 lg:mb-4">
+  <div class="flex lg:flex-row flex-col mx-20 mt-4 mb-20 lg:mb-4" :key="inventoryList">
     <div class="lg:w-3/5">
       <h1 class="text-left text-4xl my-6">{{ apartment.address }}</h1>
       <img :src="apartment.imageUrl" :alt="`Image of ${apartment.address}`" class="h-2/6 w-full object-cover rounded-xl"/>
@@ -90,9 +102,12 @@
 
 <script setup>
   import { ref } from 'vue'
+  import { reactive } from 'vue'
+
   const { id } = useRoute().params
   const { data: apartment } = await useFetch(`http://localhost:3000/api/apartments/${id}`);
-  let inventoryList = apartment._rawValue.inventoryList
+  
+  const inventoryList = reactive(apartment._rawValue.inventoryList)
   console.log(inventoryList)
   const currentInventoryQuantity = inventoryList.items.reduce((acc, curr) => {
     return acc + curr.quantity
@@ -112,7 +127,7 @@
 
   const handleCreateList = async () => {
     const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
-        method: 'post',
+        method: 'put',
         body: { 
           name: formData.value.name, 
         }
@@ -120,23 +135,30 @@
 
     if (responseData) {
       console.log(responseData)
-      const newData = await useFetch(`http://localhost:3000/api/apartments/${id}`);
-      inventoryList = newData._rawValue.inventoryList
+      inventoryList.value = responseData.inventoryList
+      console.log(inventoryList)
     }
   }
 
   const handleAddItem = async () => {
-    const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
-        method: 'post',
+    console.log(itemData._rawValue.itemQuantity)
+    console.log(currentInventoryQuantity)
+    if (currentInventoryQuantity + itemData._rawValue.itemQuantity > 20) {my_modal_1.showModal() } else {
+      const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
+        method: 'put',
         body: { 
           itemName: itemData.value.itemName, 
           itemQuantity: itemData.value.itemQuantity, 
         }
     })
 
-    // if (responseData) {
-    //   // console.log(responseData)
-    // }
+    if (responseData) {
+      console.log(responseData)
+      window.location.reload();
+      inventoryList = responseData.inventoryList
+    }
+    }
+
   }
 </script>
 
