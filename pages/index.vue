@@ -14,6 +14,13 @@
 
 <script setup>
 import houseSvg from '~/assets/house.svg';
+useHead({
+  title: 'ApartmentPro',
+  meta: [
+    { name: 'description', content: 'Inventory management' }
+  ]
+})
+
 </script>
 
 <style scoped>
