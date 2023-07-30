@@ -1,5 +1,5 @@
 <template>
-  <div class=" flex flex-col ">
+  <div class="flex flex-col ">
         <!-- header component -->
     <header class="mb-16">
       <nav class="top-0 fixed z-50 shadow-md bg-white w-screen ">

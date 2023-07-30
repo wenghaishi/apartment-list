@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
 		if (!hasItem) {
 			apartment.inventoryList.items.push({name: body.itemName, quantity: body.itemQuantity})
 		}
+		
 		console.log(apartment.inventoryList.items)
 		await apartment.save()
 		return apartment
