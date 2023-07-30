@@ -11,7 +11,7 @@
 
 <script setup>
     const { query } = useRoute().params
-    const { data: apartments } = await useFetch(`http://localhost:3000/api/search/${query}`)
+    const { data: apartments } = await useFetch(`https://apartment-list.vercel.app/api/search/${query}`)
     console.log(apartments)
 </script>
 

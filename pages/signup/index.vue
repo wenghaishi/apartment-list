@@ -33,7 +33,7 @@ const formData = ref({
 })
 
 const handleSubmit= async () => {
-    const { data: responseData } = await useFetch('http://localhost:3000/api/users/create', {
+    const { data: responseData } = await useFetch('https://apartment-list.vercel.app/api/users/create', {
         method: 'post',
         body: { 
           name: formData.value.name,

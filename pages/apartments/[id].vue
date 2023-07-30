@@ -105,7 +105,7 @@
   import { reactive } from 'vue'
 
   const { id } = useRoute().params
-  const { data: apartment } = await useFetch(`http://localhost:3000/api/apartments/${id}`);
+  const { data: apartment } = await useFetch(`https://apartment-list.vercel.app/api/apartments/${id}`);
   
   const inventoryList = reactive(apartment._rawValue.inventoryList)
   console.log(inventoryList)
@@ -126,7 +126,7 @@
   
 
   const handleCreateList = async () => {
-    const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
+    const { data: responseData } = await useFetch(`https://apartment-list.vercel.app/api/apartments/${id}`, {
         method: 'put',
         body: { 
           name: formData.value.name, 
@@ -144,7 +144,7 @@
     console.log(itemData._rawValue.itemQuantity)
     console.log(currentInventoryQuantity)
     if (currentInventoryQuantity + itemData._rawValue.itemQuantity > 20) {my_modal_1.showModal() } else {
-      const { data: responseData } = await useFetch(`http://localhost:3000/api/apartments/${id}`, {
+      const { data: responseData } = await useFetch(`https://apartment-list.vercel.app/api/apartments/${id}`, {
         method: 'put',
         body: { 
           itemName: itemData.value.itemName, 

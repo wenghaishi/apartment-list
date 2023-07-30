@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  const { data: apartments } = await useFetch('http://localhost:3000/api/apartments');
+  const { data: apartments } = await useFetch('https://apartment-list.vercel.app/api/apartments');
 </script>
 
 <style scoped>
