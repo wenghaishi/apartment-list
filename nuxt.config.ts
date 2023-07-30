@@ -14,4 +14,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  proxy: {
+    '/api/': {
+      target: 'https://apartment-list.vercel.app', // Your backend API URL
+      pathRewrite: { '^/api/': '/' },
+      changeOrigin: true,
+      secure: false, // If your backend uses HTTPS, set this to true
+    },
+  },
 });
