@@ -10,8 +10,8 @@
           </div>
 
           <div class="flex-row gap-2 items-center justify-center hidden md:flex">
-            <input type="text" placeholder="Search" class="border-2 border-slate-500 focus:outline-none rounded-md p-2 h-8"/>
-            <img :src="searchSvg" class="h-7 w-7"/>
+            <input v-model="formData.name" type="text" placeholder="Search" class="border-2 border-slate-500 focus:outline-none rounded-md p-2 h-8"/>
+            <img :src="searchSvg" @click="handleSearch" class="h-7 cursor-pointer w-7"/>
           </div>
 
           <div class="flex flex-row gap-6 items-center">
@@ -23,6 +23,7 @@
     </header>
 
     <!-- body -->
+    
     <div>
       <slot />
     </div>
@@ -39,10 +40,16 @@
 </template>
 
 <script setup>
-import houseSvg from '~/assets/house.svg';
-import searchSvg from '~/assets/search.svg';
-
-
+  import { ref } from 'vue'
+  import houseSvg from '~/assets/house.svg';
+  import searchSvg from '~/assets/search.svg';
+  const formData = ref({
+      name: ''
+    })
+  const handleSearch = async() => {
+    const { data: responseData } = await useFetch(`http://localhost:3000/api/search/${formData.value.name}`)
+    console.log(responseData)
+  }
 </script>
 
 <style lang="scss" scoped>
