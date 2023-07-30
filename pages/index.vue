@@ -1,5 +1,5 @@
 <template >
-  <div class="flex flex-col items-center justify-evenly h-full mx-20 md:p-20 self-center">
+  <div class="flex flex-col items-center mt-12 justify-center h-full mx-20 md:p-20 self-center">
     <NuxtLink to="/apartments" class="flex flex-row justify-evenly items-center mb-12">
       <h1 class="text-4xl md:text-6xl font-semibold ">ApartmentPro</h1>
       <img :src="houseSvg" class="md:h-40 md:w-40 w-24 h-24"/>

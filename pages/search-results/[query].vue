@@ -10,8 +10,11 @@
 </template>
 
 <script setup>
-  const { data: apartments } = await useFetch('https://apartment-list.vercel.app/api/apartments');
+    const { query } = useRoute().params
+    const { data: apartments } = await useFetch(`https://apartment-list.vercel.app/api/search/${query}`)
+    console.log(apartments)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 </style>
