@@ -4,7 +4,7 @@
 <dialog id="my_modal_1" class="modal">
   <form method="dialog" class="modal-box">
     <h3 class="font-bold text-3xl">Error</h3>
-    <p class="py-4 text-xl text-red-500 ">Item number exceeded the maximum: 20</p>
+    <p class="py-4 text-xl text-red-500 italic">Exceeded max item quantity: 20</p>
     <div class="modal-action">
       <!-- if there is a button in form, it will close the modal -->
       <button class="btn">Close</button>

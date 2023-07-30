@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col ">
+  <div class="flex flex-col " @keydown="handleKeyDown">
         <!-- header component -->
     <header class="mb-16">
       <nav class="top-0 fixed z-50 shadow-md bg-white w-screen ">
@@ -10,7 +10,7 @@
           </div>
 
           <div class="flex-row gap-2 items-center justify-center hidden md:flex">
-            <input v-model="formData.name" type="text" placeholder="Search" class="border-2 border-slate-500 focus:outline-none rounded-md p-2 h-8"/>
+            <input v-model="formData.name" type="text" placeholder="Apartment  search" class="border-2 border-slate-500 focus:outline-none rounded-md p-2 h-8"/>
             <img :src="searchSvg" @click="handleSearch" class="h-7 cursor-pointer w-7"/>
           </div>
 
@@ -40,16 +40,20 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
   import houseSvg from '~/assets/house.svg';
   import searchSvg from '~/assets/search.svg';
   const formData = ref({
       name: ''
     })
   const handleSearch = async() => {
-    const { data: responseData } = await useFetch(`http://localhost:3000/api/search/${formData.value.name}`)
-    console.log(responseData)
+    await useRouter().push(`/search-results/${formData.value.name}`)
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
