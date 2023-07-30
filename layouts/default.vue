@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col " @keydown="handleKeyDown">
         <!-- header component -->
-    <header class="mb-16">
+    <header class="mb-16 w-screen">
       <nav class="top-0 fixed z-50 shadow-md bg-white w-screen ">
-        <div class="p-4 flex flex-row justify-between px:4 md:px-10 items-center h-16 max-w-screen-2xl">
+        <div class="p-4 flex flex-row justify-between px:4 md:px-10 items-center h-16">
           <div class="flex flex-row gap-10 items-center">
             <NuxtLink to="/" class="flex flex-row gap-3 items-center"><img :src="houseSvg" class="h-10 w-10"/><h1 class="hidden text-sm md:text-lg lg:flex">ApartmentPro</h1></NuxtLink>
             <NuxtLink to="/apartments" class="text-sm md:text-lg">Apartments</NuxtLink>
